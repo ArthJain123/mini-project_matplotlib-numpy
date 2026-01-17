@@ -1,0 +1,126 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# viswalise the data of 50students and their subjects(maths,science,english)
+sr_no = np.arange(1,51)
+numbers = sr_no.reshape((50,1))
+
+hours = np.random.randint(1,9,size =50)
+
+marks = np.array([
+    [78, 85, 74],
+    [65, 70, 60],
+    [90, 92, 88],
+    [55, 48, 52],
+    [82, 79, 85],
+    [40, 42, 38],
+    [72, 75, 70],
+    [88, 90, 92],
+    [60, 58, 62],
+    [95, 94, 96],
+
+    [68, 65, 70],
+    [45, 50, 48],
+    [76, 80, 78],
+    [33, 35, 30],
+    [84, 82, 80],
+    [59, 61, 63],
+    [91, 89, 93],
+    [67, 69, 65],
+    [74, 72, 70],
+    [86, 88, 85],
+
+    [52, 55, 50],
+    [79, 81, 77],
+    [64, 66, 68],
+    [47, 45, 49],
+    [88, 85, 90],
+    [71, 73, 75],
+    [39, 42, 40],
+    [92, 95, 94],
+    [58, 60, 62],
+    [80, 78, 82],
+
+    [66, 68, 70],
+    [44, 46, 48],
+    [83, 85, 87],
+    [75, 77, 79],
+    [69, 71, 73],
+    [53, 55, 57],
+    [90, 88, 92],
+    [61, 63, 65],
+    [48, 50, 52],
+    [85, 87, 89],
+
+    [72, 74, 76],
+    [34, 36, 38],
+    [96, 97, 95],
+    [57, 59, 61],
+    [81, 83, 85],
+    [63, 65, 67],
+    [41, 43, 45],
+    [77, 79, 81],
+    [54, 56, 58],
+    [89, 91, 93]
+])
+
+# shape of the marks array
+print("Shape of the marks array :",marks.shape,"\n")
+
+
+# average of the each subject
+avg = np.mean(marks,axis = 0 )
+print("Average of the each subject :",avg,"\n")
+
+# average of the each student
+avg_stu = np.mean(marks,axis = 1)
+print("Average of the each student :",avg_stu,"\n")
+
+sorting = np.flip(np.sort(avg_stu,axis = 0))
+print(sorting,"\n")
+
+print("Top 5 students based on their avg :",sorting[:5],"\n")
+# print("Top 5 Student IDs:",numbers[sorting])
+
+
+where_condition = np.where(marks>=40,"Pass","Fail")
+# print(where_condition)
+
+
+max_avg = numbers[avg_stu == np.max(avg_stu)]
+print(max_avg,"\n")
+
+min_avg = numbers[avg_stu == np.min(avg_stu)]
+print(min_avg,"\n")
+
+
+plt.title("Average marks per subject",fontsize = 20)
+
+subjects = np.array(["Maths","Science","English"])
+plt.xlabel("Name of Subjects")
+plt.ylabel("Average numbers for each Subject")
+
+plt.bar(subjects,avg,color = ["red","green","pink"],alpha =0.5)
+plt.grid()
+plt.show()
+
+
+
+plt.title("Student ID vs Overall Average Marks")
+plt.xlabel("Sr. number of all students")
+plt.ylabel("Avgerage marks of each student")
+
+plt.plot(sr_no,avg_stu,color = "green")
+plt.axhline(65)
+plt.grid()
+plt.show()
+
+
+
+plt.title("Study Hours vs Overall Average Marks",fontsize = 20)
+plt.xlabel("Study hours")
+plt.ylabel("Average marks of all students")
+plt.scatter(hours,avg_stu ,color ="skyblue")
+plt.grid()
+plt.show()
